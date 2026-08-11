@@ -1,0 +1,21 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.keysContainer, inputKeysSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btnSection {
+  display: flex;
+  jsutify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

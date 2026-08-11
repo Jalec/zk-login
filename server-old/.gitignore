@@ -1,0 +1,69 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Packages
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Python packaging
+*.manifest
+*.spec
+
+# Distribution / deployment
+wheelhouse/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Unit test / coverage
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+
+# IDE / editor config
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets / local config
+.env
+*.env
+secrets.json
+
+# Logs
+*.log
+
+# Generated keys, certs (if you generate keys locally)
+*.pem
+*.key
+*.crt
+
+# Ignore database or sqlite files if applicable
+*.db
+*.sqlite3
