@@ -1,21 +1,122 @@
+@font-face {
+    font-family: "Akatab";
+    src: url("./fonts/Akatab-Regular.ttf") format("truetype");
+}
+
+/* ------ MAIN LAYOUT ------ */
 body {
+  margin: 0;
+  /*min-height: 100vh;*/
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  font-family: "Akatab", sans-serif;
+  background-color: #222;
+  color: #EEE;
+}
+
+.mainTitle {
+  margin-top: 5rem;
+}
+
+.mainLayout {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 3rem;
+}
+
+.keysContainer, 
+.inputKeysSection {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.keysContainer, inputKeysSection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  gap: 1rem;
+.keysContainer {
+  gap: 2rem;
+}
+
+.inputKeysSection {
+  gap: 1.5rem;
+}
+
+.inputKeysSection p {
+  margin-top: 0;
+  margin-bottom: 3px;
+  font-size: 1.2rem;
 }
 
 .btnSection {
   display: flex;
-  jsutify-content: center;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
 }
+
+#privateKeyInput,
+#publicKeyInput {
+  color: #EEE;
+  width: 600px;
+  height: 40px;
+  font-size: 1.2rem;
+  border-radius: 10px;
+  border: 2px solid #8707ff;
+  background: transparent;
+  padding: 8px 20px;
+}
+
+#btnUserLogin,
+#btnGetKeys {
+  width: 200px;
+  height: 40px;
+  font-size: 1rem;
+  border-radius: 10px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 2px solid #EEE;
+  color: #EEE;
+  box-shadow: 3px 3px #EEE;
+  cursor: pointer;
+}
+
+#btnUserLogin:active,
+#btnGetKeys:active {
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+
+
+/* ------- MODAL SIGN UP ------- */
+
+#modalKeys {
+  display: none;
+  position:fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.modalContent {
+  color: #EEE;
+  background-color: #222;
+  margin: 15% auto;
+  padding: 30px; 
+  width: 40%;
+}
+
+/* ------- DIAGRAM -------- */
+
+.titleDiagram {
+  text-align: center;
+}
+
+

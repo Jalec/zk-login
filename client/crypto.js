@@ -1,4 +1,4 @@
-import { base64urlToBytes, bytesToBigInt, bytesToHex } from './utils.js'
+import { base64urlToBytes, bytesToBigInt, bytesToHex, hexToBytes } from './utils.js'
 
 const EcKeyGenParams = {
   name: "ECDSA",
@@ -25,9 +25,39 @@ export async function generateUserKeys() {
 }
 
 export async function login(hexPublicKey, hexPrivateKey) {
-  console.log("User's public key: ", hexPublicKey);
-  console.log("User's private key: ", hexPrivateKey);
+  //console.log("User's public key: ", hexToBytes(hexPublicKey).buffer);
+  //console.log("Back again: ", bytesToHex(hexToBytes(hexPublicKey)));
+  //console.log("User's private key: ", hexToBytes(hexPrivateKey));
+ 
+  const bigIntPrivKey = bytesToBigInt(hexToBytes(hexPrivateKey));
+  const publicKey = hexToBytes(hexPublicKey);
 
+  const schnorrKeyPair = await generateKeys();
+  const [nonce, commitment] = await extractKeys(schnorrKeyPair);
+
+  const singlet = await generateSinglet(bigIntPrivKey, nonce, commitment);
+
+  const publicKeyBase64 = btoa(
+    String.fromCharCode(...publicKey)
+  );
+
+  const commitmentBytes = new Uint8Array(commitment);
+  const commitmentBase64 = btoa(
+    String.fromCharCode(...commitmentBytes)
+  );
+
+
+  const response = await fetch("http://127.0.0.1:8000/userLogin", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ 
+      "public_key": publicKeyBase64,
+      "singlet": singlet.toString(16),
+      "commitment": commitmentBase64 
+    })
+  })
+
+  const data = await response.json();
 }
 
 
@@ -77,16 +107,15 @@ const commitmentBase64 = btoa(
     String.fromCharCode(...commitmentBytes)
 );
 
+//const response = await fetch("http://127.0.0.1:8000/userLogin", {
+//  method: "POST",
+//  headers: {"Content-Type": "application/json"},
+//  body: JSON.stringify({ 
+//    "public_key": publicKeyBase64,
+//    "singlet": singlet.toString(16),
+//    "commitment": commitmentBase64 
+//  })
+//})
 
-const response = await fetch("http://127.0.0.1:8000/userLogin", {
-  method: "POST",
-  headers: {"Content-Type": "application/json"},
-  body: JSON.stringify({ 
-    "public_key": publicKeyBase64,
-    "singlet": singlet.toString(16),
-    "commitment": commitmentBase64 
-  })
-})
-
-const data = await response.json();
-console.log(data);
+//const data = await response.json();
+//console.log(data);
